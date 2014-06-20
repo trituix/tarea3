@@ -13,7 +13,6 @@ public class Ball extends PhysicsElement implements Simulateable, SpringAttachab
    private double a_tMinusDelta; 
    private BallView view;  // Ball view of Model-View-Controller design pattern
    private ArrayList<Spring> springs;
-   private Sound sound;
    
    private Ball(){   // nobody can create a block without state
      this(1.0,0.1,0,0);
@@ -27,7 +26,6 @@ public class Ball extends PhysicsElement implements Simulateable, SpringAttachab
       a_t=a_tMinusDelta=0;
       view = new BallView(this);
       springs = new ArrayList<Spring>();
-      sound = new Sound("tick.wav");
    }
    public double getMass() {
       return mass;
@@ -52,7 +50,6 @@ public class Ball extends PhysicsElement implements Simulateable, SpringAttachab
      if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */
         speed_tPlusDelta=(speed_t*(mass-b.getMass())+2*b.getMass()*b.getSpeed())/(mass+b.getMass());
         pos_tPlusDelta = pos_t;
-        this.sound.playOnce();
      } else {
         a_t= getNetForce()/mass;
         speed_tPlusDelta = speed_t+(3*a_t-a_tMinusDelta)*delta_t/2;

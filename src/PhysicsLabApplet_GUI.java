@@ -1,19 +1,18 @@
-import javax.swing.JInternalFrame;
 import javax.swing.*;
 
-class PhysicsLab_GUI extends JInternalFrame {
-   public PhysicsLab_GUI() {
+class PhysicsLabApplet_GUI extends JInternalFrame {
+   public PhysicsLabApplet_GUI() {
       //setTitle("My Small and Nice Physics Laboratory");
       setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
       MyWorld world = new MyWorld();
       MyWorldView  worldView = new MyWorldView(world);
       world.setView(worldView);
       add(worldView);
-      LabMenuListener menuListener = new LabMenuListener(world);
+      LabMenuListenerApplet menuListener = new LabMenuListenerApplet(world);
       setJMenuBar(createLabMenuBar(menuListener));
    }
 
-   public JMenuBar createLabMenuBar(LabMenuListener menu_l) {
+   public JMenuBar createLabMenuBar(LabMenuListenerApplet menu_l) {
       JMenuBar mb = new JMenuBar();
 
       JMenu menu = new JMenu ("Configuration");

@@ -2,17 +2,20 @@ import java.util.*;
 import java.io.*;
 import javax.swing.Timer;
 import java.awt.event.*;
-
+import java.applet.AudioClip;
+import java.net.URL;
+ 
 public class MyWorld implements ActionListener {
    private PrintStream out;
-
+ 
    private ArrayList<PhysicsElement> elements;  // array to hold everything in my world.
    private MyWorldView view;   // NEW
    private Timer passingTime;   // NEW
    private double t;        // simulation time
    private double delta_t;        // in seconds
    private double refreshPeriod;  // in seconds
-
+   private AudioClip ballcollisionsound;
+ 
    public MyWorld(){
       this(System.out);  // delta_t= 0.1[ms] and refreshPeriod=200 [ms]
    }
@@ -24,8 +27,10 @@ public class MyWorld implements ActionListener {
       elements = new ArrayList<PhysicsElement>();
       view = null;
       passingTime = new Timer((int)(refreshPeriod*1000), this);
+      URL sound = this.getClass().getClassLoader().getResource("bolas.wav");
+      ballcollisionsound = java.applet.Applet.newAudioClip(sound);
    }
-
+ 
    public void addElement(PhysicsElement e) {
       elements.add(e);
       view.repaintView();
@@ -49,7 +54,7 @@ public class MyWorld implements ActionListener {
       passingTime.stop();
       view.enableMouseListener();
    }
-
+ 
    public void actionPerformed (ActionEvent event) {  // like simulate method of Assignment 1,
       double nextStop=t+refreshPeriod;                // the arguments are attributes here.
       for (; t<nextStop; t+=delta_t){
@@ -66,24 +71,27 @@ public class MyWorld implements ActionListener {
       }
       repaintView();
    }
-
+ 
    public void repaintView(){
       view.repaintView();
    }
-
+ 
    public Ball findCollidingBall(Ball me) {
       for (PhysicsElement e: elements)
          if ( e instanceof Ball) {
             Ball b = (Ball) e;
-            if ((b!=me) && b.collide(me)) return b;
+            if ((b!=me) && b.collide(me)){
+             ballcollisionsound.play();
+                return b;
+            }
          }
       return null;
    }
-
+ 
    public ArrayList<PhysicsElement> getPhysicsElements(){
       return elements;
    }
-
+ 
    public PhysicsElement find(double x, double y) {
       for (PhysicsElement e: elements)
             if (e.contains(x,y)) return e;
