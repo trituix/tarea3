@@ -35,9 +35,9 @@ public class PhysicChart extends JPanel
 		mechanicalData = new XYSeries("Energia Mecanica");
 		potentialData = new XYSeries("Energia Potencial");
 		kineticData = new XYSeries("Energia Cinetica");
-		mechanicalData.setMaximumItemCount(1000);
-		potentialData.setMaximumItemCount(1000);
-		kineticData.setMaximumItemCount(1000);
+		mechanicalData.setMaximumItemCount(500);
+		potentialData.setMaximumItemCount(500);
+		kineticData.setMaximumItemCount(500);
 		mechanicalDataCollection.addSeries(mechanicalData);
 		potentialDataCollection.addSeries(potentialData);
 		kineticDataCollection.addSeries(kineticData);
@@ -55,6 +55,13 @@ public class PhysicChart extends JPanel
         add(kineticChartPanel);
     }
     
+    public void setMaxPlotTime(int maxPlotTime)
+    {
+        mechanicalData.setMaximumItemCount(maxPlotTime);
+        potentialData.setMaximumItemCount(maxPlotTime);
+        kineticData.setMaximumItemCount(maxPlotTime);
+    }
+
     public void updateChart()
     {
     	mechanicalData.add(time, world.getMechanicalEnergy());
