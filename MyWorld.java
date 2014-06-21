@@ -15,7 +15,8 @@ public class MyWorld implements ActionListener {
    private double delta_t;        // in seconds
    private double refreshPeriod;  // in seconds
    private AudioClip ballcollisionsound;
- 
+   private PhysicChart chart;
+
    public MyWorld(){
       this(System.out);  // delta_t= 0.1[ms] and refreshPeriod=200 [ms]
    }
@@ -31,6 +32,11 @@ public class MyWorld implements ActionListener {
       ballcollisionsound = java.applet.Applet.newAudioClip(sound);
    }
  
+   public void setChart(PhysicChart c)
+   {
+      chart = c;
+   }
+
    public void addElement(PhysicsElement e) {
       elements.add(e);
       view.repaintView();
@@ -82,6 +88,7 @@ public class MyWorld implements ActionListener {
             }
       }
       repaintView();
+      chart.updateChart();
    }
  
    public void repaintView(){
@@ -142,10 +149,8 @@ public class MyWorld implements ActionListener {
    }
    
    public double getMechanicalEnergy(){
-      double totalMecanicEnergy=0;
-      for (PhysicsElement e: elements)
-         totalMecanicEnergy+= e.getEnergy();
-      return totalMecanicEnergy;
-            
+      double totalMechanicalEnergy=0;
+      totalMechanicalEnergy += getKineticEnergy() + getPotentialEnergy();
+      return totalMechanicalEnergy;
    }
 }

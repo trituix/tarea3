@@ -42,13 +42,11 @@ public class LabMenuListener implements ActionListener {
       if (text.equals("Start"))
       {
         world.start();
-        chart.start();
       }
         
       if (text.equals("Stop"))
       {
         world.stop();
-        chart.stop();
       }
         
       if (text.equals("Delta time")) {

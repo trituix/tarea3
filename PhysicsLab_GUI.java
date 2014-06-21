@@ -13,6 +13,7 @@ class PhysicsLab_GUI extends JFrame {
       //add(worldView);
       PhysicChart chart = new PhysicChart("Un titulo", world);
       chart.setVisible(true);
+      world.setChart(chart);
       //add(chart);
       JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, worldView, chart);
       splitPane.setDividerLocation(0.5);

@@ -1,7 +1,5 @@
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.Color;
-import java.awt.event.*;
 import java.awt.GridLayout;
 
 import org.jfree.chart.ChartFactory;
@@ -17,10 +15,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
-public class PhysicChart extends JPanel implements ActionListener
+public class PhysicChart extends JPanel
 {
 	protected MyWorld world;
-	private Timer passingTime;
 	private double time = 0;
 	private XYSeriesCollection mechanicalDataCollection;
 	private XYSeriesCollection potentialDataCollection;
@@ -56,26 +53,14 @@ public class PhysicChart extends JPanel implements ActionListener
         add(mechanicalChartPanel);
         add(potentialChartPanel);
         add(kineticChartPanel);
-        passingTime = new Timer((int)world.getRefreshTime()*1000, this);
     }
     
-    public void actionPerformed (ActionEvent event)
+    public void updateChart()
     {
     	mechanicalData.add(time, world.getMechanicalEnergy());
     	potentialData.add(time, world.getPotentialEnergy());
 		kineticData.add(time, world.getKineticEnergy());
     	time += world.getDelta_t();
-    }
-
-    public void start()
-    {
-    	if(passingTime.isRunning()) return;
-      	passingTime.start();
-    }
-
-    public void stop()
-    {
-    	passingTime.stop();
     }
 
     private JFreeChart createChart(final XYDataset dataset, String chartTitle, String xLabel, String yLabel) {
