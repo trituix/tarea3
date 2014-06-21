@@ -1,4 +1,5 @@
 default:
+	mkdir -p bin
 	javac -d . src/*.java
 
 jar:
@@ -11,6 +12,5 @@ runApplet:
 	appletviewer PhysicsLab.html
 
 clean:
-	rm -f src/*.class
-	rm -f *.jar
 	rm -f *.class
+	rm -f *.jar
