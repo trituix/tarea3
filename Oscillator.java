@@ -63,4 +63,9 @@ public class Oscillator extends PhysicsElement implements Simulateable, SpringAt
    public void detachSpring(Spring s){
      springs.remove(s);
    }
+@Override
+public double getEnergy() {
+	// TODO Auto-generated method stub
+	return 0;
+}
 }

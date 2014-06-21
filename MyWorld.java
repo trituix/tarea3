@@ -38,9 +38,21 @@ public class MyWorld implements ActionListener {
    public void setView(MyWorldView view) {
       this.view = view;
    }
+
+   public double getDelta_t()
+   {
+      return delta_t;
+   }
+
    public void setDelta_t(double delta) {
       delta_t = delta;
    }
+
+   public double getRefreshTime()
+   {
+      return refreshPeriod;
+   }
+
    public void setRefreshPeriod (double rp) {
       refreshPeriod = rp;
       passingTime.setDelay((int)(refreshPeriod*1000)); // convert from [s] to [ms]
@@ -111,5 +123,29 @@ public class MyWorld implements ActionListener {
          if (e instanceof SpringAttachable)
             if (e.contains(x,0)) return (SpringAttachable)e;
       return null;
+   }
+
+   public double getPotentialEnergy(){
+      double totalPotencialEnergy=0;
+      for (PhysicsElement e: elements)
+         if (e instanceof Spring)
+            totalPotencialEnergy+= e.getEnergy();
+      return totalPotencialEnergy;
+   }
+   
+   public double getKineticEnergy(){
+      double totalcineticEnergy=0;
+      for (PhysicsElement e: elements)
+         if (e instanceof Ball)
+            totalcineticEnergy+= e.getEnergy();
+      return totalcineticEnergy;
+   }
+   
+   public double getMechanicalEnergy(){
+      double totalMecanicEnergy=0;
+      for (PhysicsElement e: elements)
+         totalMecanicEnergy+= e.getEnergy();
+      return totalMecanicEnergy;
+            
    }
 }

@@ -1,4 +1,5 @@
 *.class
-*.jar
-bin/*.class
-bin/*.jar
+PhysicsLab.jar
+com/
+META-INF/
+org/

@@ -1,14 +1,23 @@
 import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+
 
 class PhysicsLab_GUI extends JFrame {
    public PhysicsLab_GUI() {
       //setTitle("My Small and Nice Physics Laboratory");
-      setSize(MyWorldView.WIDTH + 100, MyWorldView.HEIGHT + 100);  // height+50 to account for menu height
+      setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH );
       MyWorld world = new MyWorld();
       MyWorldView  worldView = new MyWorldView(world);
       world.setView(worldView);
-      add(worldView);
-      LabMenuListener menuListener = new LabMenuListener(world);
+      //add(worldView);
+      PhysicChart chart = new PhysicChart("Un titulo", world);
+      chart.setVisible(true);
+      //add(chart);
+      JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, worldView, chart);
+      splitPane.setDividerLocation(0.5);
+      add(splitPane);
+      LabMenuListener menuListener = new LabMenuListener(world, chart);
       setJMenuBar(createLabMenuBar(menuListener));
    }
 

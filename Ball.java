@@ -45,6 +45,11 @@ public class Ball extends PhysicsElement implements Simulateable, SpringAttachab
        force+=s.getForce(this);
      return force;
    }
+   public double getEnergy(){
+	     double energy=0; 
+	       energy=mass*speed_t*speed_t*0.5;
+	     return energy;
+	   }
    public void computeNextState(double delta_t, MyWorld world) {
      Ball b;  // Assumption: on collision we only change speed.   
      if ((b=world.findCollidingBall(this))!= null){ /* elastic collision */

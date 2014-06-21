@@ -46,4 +46,9 @@ public class FixedHook extends PhysicsElement implements SpringAttachable {
    public void detachSpring(Spring s){
      springs.remove(s);
    }
+@Override
+public double getEnergy() {
+	// TODO Auto-generated method stub
+	return 0;
+}
 }
