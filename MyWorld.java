@@ -28,8 +28,15 @@ public class MyWorld implements ActionListener {
       elements = new ArrayList<PhysicsElement>();
       view = null;
       passingTime = new Timer((int)(refreshPeriod*1000), this);
-      URL sound = this.getClass().getClassLoader().getResource("bolas.wav");
-      ballcollisionsound = java.applet.Applet.newAudioClip(sound);
+      try{
+         URL sound = this.getClass().getClassLoader().getResource("bolas.wav");
+         ballcollisionsound = java.applet.Applet.newAudioClip(sound);
+         System.out.print(sound);
+      }
+      catch(Exception e)
+      {
+         
+      }
    }
  
    public void setChart(PhysicChart c)

@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 
 public class PhysicsLabApplet extends JApplet{
    public void init() {
-      setLayout(new GridLayout(2, 1));
       PhysicsLabApplet_GUI gui = new PhysicsLabApplet_GUI();
       /*JPanel test = new JPanel();
       test.setLayout(new GridLayout(1, 3));

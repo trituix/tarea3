@@ -7,7 +7,12 @@ class PhysicsLabApplet_GUI extends JInternalFrame {
       MyWorld world = new MyWorld();
       MyWorldView  worldView = new MyWorldView(world);
       world.setView(worldView);
-      add(worldView);
+      PhysicChart chart = new PhysicChart("Un titulo", world);
+      chart.setVisible(true);
+      world.setChart(chart);
+      JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, worldView, chart);
+      splitPane.setDividerLocation(0.5);
+      add(splitPane);
       LabMenuListenerApplet menuListener = new LabMenuListenerApplet(world);
       setJMenuBar(createLabMenuBar(menuListener));
    }
