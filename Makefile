@@ -1,5 +1,4 @@
 default:
-	mkdir -p bin
 	javac -d . src/*.java
 
 jar:
