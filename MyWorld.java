@@ -34,7 +34,7 @@ public class MyWorld implements ActionListener {
       }
       catch(Exception e)
       {
-         
+         System.out.print("No se pudo cargar el sonido");
       }
    }
  
@@ -106,8 +106,14 @@ public class MyWorld implements ActionListener {
          if ( e instanceof Ball) {
             Ball b = (Ball) e;
             if ((b!=me) && b.collide(me)){
-             ballcollisionsound.play();
-                return b;
+               try{
+                  ballcollisionsound.play();   
+               }
+               catch(Exception ex)
+               {
+                  System.out.print("No se pudo cargar el sonido");
+               }
+               return b;
             }
          }
       return null;
