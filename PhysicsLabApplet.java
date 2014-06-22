@@ -26,7 +26,7 @@ public class PhysicsLabApplet extends JApplet{
          JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, worldView, chart);
          splitPane.setDividerLocation(0.5);
          add(splitPane);
-         LabMenuListenerApplet menuListener = new LabMenuListenerApplet(world);
+         LabMenuListenerApplet menuListener = new LabMenuListenerApplet(world, chart);
          setJMenuBar(createLabMenuBar(menuListener));
       }
 
@@ -62,6 +62,9 @@ public class PhysicsLabApplet extends JApplet{
          menuItem = new JMenuItem("Stop");
          menuItem.addActionListener(menu_l);
          menu.add(menuItem);
+         menuItem = new JMenuItem("Reset Plot");
+         menuItem.addActionListener(menu_l);
+         menu.add(menuItem);
          subMenu = new JMenu("Simulator");
          menuItem = new JMenuItem("Delta time");
          menuItem.addActionListener(menu_l);
@@ -76,8 +79,10 @@ public class PhysicsLabApplet extends JApplet{
 
    class LabMenuListenerApplet implements ActionListener {
       private MyWorld  world;
-      public LabMenuListenerApplet (MyWorld  w){
+      private PhysicChart chart;
+      public LabMenuListenerApplet (MyWorld  w, PhysicChart c){
          world = w;
+         chart = c;
       }
       public void actionPerformed(ActionEvent e) {
          JMenuItem menuItem = (JMenuItem)(e.getSource());
@@ -132,7 +137,10 @@ public class PhysicsLabApplet extends JApplet{
 
          if (text.equals("Stop"))    /* to be coded */
            world.stop();
-
+         if(text.equals("Reset Plot"))
+         {
+            chart.reset();
+         }
          if (text.equals("Delta time")) {
             String data = JOptionPane.showInputDialog("Enter delta t [s]");
             world.setDelta_t(Double.parseDouble(data));

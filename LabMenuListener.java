@@ -48,7 +48,10 @@ public class LabMenuListener implements ActionListener {
       {
         world.stop();
       }
-        
+      if(text.equals("Reset Plot"))
+      {
+        chart.reset();
+      }
       if (text.equals("Delta time")) {
          String data = JOptionPane.showInputDialog("Enter delta t [s]");
          world.setDelta_t(Double.parseDouble(data));

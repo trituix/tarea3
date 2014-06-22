@@ -62,6 +62,14 @@ public class PhysicChart extends JPanel
         kineticData.setMaximumItemCount(maxPlotTime);
     }
 
+    public void reset()
+    {
+        mechanicalData.clear();
+        potentialData.clear();
+        kineticData.clear();
+        time = 0;
+    }
+
     public void updateChart()
     {
     	mechanicalData.add(time, world.getMechanicalEnergy());
